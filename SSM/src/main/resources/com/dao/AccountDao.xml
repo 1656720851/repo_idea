@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.AccountDao">
+    <!--映射文件-->
+
+    <!--查询所有-->
+    <select id="findAll" resultType="account">
+        select * from account
+    </select>
+
+    <!--添加账户-->
+    <insert id="save" parameterType="account">
+        insert into account(name,money) values (#{name},#{money})
+    </insert>
+
+    <!--查询账户id-->
+    <select id="findById" parameterType="int" resultType="account">
+        select *from account where id =#{id};
+    </select>
+
+    <!--修改账户-->
+    <update id="update" parameterType="account">
+        update account set name=#{name},money=#{money} where id=#{id}
+    </update>
+
+    <!--删除账号-->
+    <delete id="deleteBatch" parameterType="int">
+        delete from account
+        <where>
+            <foreach collection="array" open="id in(" close=")" item="id" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
+</mapper>
