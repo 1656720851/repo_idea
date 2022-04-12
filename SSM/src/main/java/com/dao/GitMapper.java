@@ -5,4 +5,6 @@ package com.dao;
  */
 public interface GitMapper {
     public  void test();
+
+    public  void test1();
 }
